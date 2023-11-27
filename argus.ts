@@ -53,7 +53,7 @@ class NUM_Matcher extends MatcherBase<number> {
     super(options, default_result, target);
   }
 
-  run(): any {
+  override run(): any {
     super.run();
     const result_generator = this.options.get(this.target);
     if (!result_generator) return this.default_result;
@@ -70,17 +70,9 @@ class STR_Matcher extends MatcherBase<string> {
     super(options, default_result, target);
   }
 
-  run(): any {
+  override run(): any {
     super.run();
     return this.options.has(this.target) ?
       this.options.get(this.target) : this.default_result;
   }
 }
-
-const value = 1;
-const result = match(value)
-  .with(1, () => ({value}))
-  .with(2, (t) => t + 1)
-  .otherwise("test");
-
-console.log(result);
